@@ -46,3 +46,9 @@ void Parallelogram::setFinishPoints(int x, int y) {
     _angleRadian = atan2(_a, _b);
     _touch = true;
 }
+
+void Parallelogram::move(int dx, int dy) {
+    _x1 += dx;
+    _y1 += dy;
+    _touch = true;
+}

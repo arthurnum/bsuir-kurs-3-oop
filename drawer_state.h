@@ -6,6 +6,7 @@
 const int DRAWER_IDLE = 0;
 const int DRAWER_SET_START_POINTS = 1;
 const int DRAWER_SET_FINISH_POINTS = 2;
+const int DRAWER_MOVE = 3;
 
 class DrawerState {
     protected:

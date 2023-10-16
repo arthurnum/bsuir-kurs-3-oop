@@ -35,3 +35,9 @@ void Triangle::setFinishPoints(int x, int y) {
     _b = y - _y1;
     _touch = true;
 }
+
+void Triangle::move(int dx, int dy) {
+    _x1 += dx;
+    _y1 += dy;
+    _touch = true;
+}

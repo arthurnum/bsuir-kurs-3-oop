@@ -33,3 +33,11 @@ void Line::setFinishPoints(int x, int y) {
     _y2 = y;
     _touch = true;
 }
+
+void Line::move(int dx, int dy) {
+    _x1 += dx;
+    _y1 += dy;
+    _x2 += dx;
+    _y2 += dy;
+    _touch = true;
+}

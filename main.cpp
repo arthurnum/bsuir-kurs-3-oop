@@ -34,6 +34,8 @@ int main() {
     char running = 1;
 
     GeometrySet* figures = new GeometrySet();
+    std::list<Geometry*>::iterator figuresIter = figures->itemsIterator();
+
 
     GeometrySet* buttonGeo;
     Button* button;
@@ -93,6 +95,7 @@ int main() {
     };
     buttons.push_back(button);
 
+
     while (running) {
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
@@ -100,6 +103,39 @@ int main() {
                 switch (event.key.keysym.sym) {
                     case SDLK_ESCAPE:
                         running = 0;
+                        break;
+                    case SDLK_TAB:
+                        if (DrawerState::State() == DRAWER_IDLE) {
+                            if (!figures->items()->empty()) {
+                                if (figuresIter != figures->itemsIteratorEnd()) {
+                                    (*figuresIter)->drop();
+                                    figuresIter++;
+                                }
+                                if (figuresIter == figures->itemsIteratorEnd()) {
+                                    figuresIter = figures->itemsIterator();
+                                }
+                                (*figuresIter)->take();
+                            }
+                        }
+                        break;
+                    case SDLK_m:
+                        DrawerState::SetState(DRAWER_MOVE);
+                        break;
+                    case SDLK_x:
+                        if (figuresIter != figures->itemsIteratorEnd()) {
+                            (*figuresIter)->drop();
+                        }
+                        figuresIter = figures->itemsIteratorEnd();
+                        break;
+
+                    // Other input here
+                    default:
+                        break;
+                }
+            } else if (event.type == SDL_KEYUP) {
+                switch (event.key.keysym.sym) {
+                    case SDLK_m:
+                        DrawerState::SetState(DRAWER_IDLE);
                         break;
 
                     // Other input here
@@ -127,6 +163,14 @@ int main() {
                     case DRAWER_SET_FINISH_POINTS:
                         DrawerState::CurrentFigure()->setFinishPoints(event.motion.x, event.motion.y);
                         break;
+                    case DRAWER_MOVE:
+                        if (
+                            !figures->items()->empty() &&
+                            figuresIter != figures->itemsIteratorEnd()
+                        ) {
+                            (*figuresIter)->move(event.motion.xrel, event.motion.yrel);
+                        }
+                        break;
                 }
             } else if (event.type == SDL_QUIT) {
                 running = 0;
@@ -136,10 +180,8 @@ int main() {
         render->setColor(0, 0, 0, 255);
         render->clear();
 
-        render->setColor(255, 255, 255, 255);
         render->renderGeometrySet(figures);
 
-        render->setColor(200, 200, 255, 255);
         for (Button* btn : buttons) {
             render->renderGeometrySet(btn->geometrySet());
         }

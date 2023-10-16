@@ -9,6 +9,7 @@ class Triangle : public Geometry {
         SDL_Point* geometry() override;
         void setStartPoints(int x, int y) override;
         void setFinishPoints(int x, int y) override;
+        void move(int dx, int dy) override;
 
 
     private:
