@@ -12,8 +12,12 @@
 #include "button.h"
 #include "render.h"
 #include "drawer_state.h"
+#include "shared/plugin_loader.h"
+
 
 int main() {
+    Plugin* colorizer = PluginLoader::LoadPlugin("shared/colorizer/colorizer.so");
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         return -1;
     }
@@ -175,6 +179,8 @@ int main() {
             } else if (event.type == SDL_QUIT) {
                 running = 0;
             }
+
+            colorizer->handleEvent(event);
         }
 
         render->setColor(0, 0, 0, 255);
@@ -191,5 +197,8 @@ int main() {
 
     SDL_DestroyWindow(window);
     SDL_Quit();
+
+    if (colorizer != NULL) { PluginLoader::Close(colorizer); }
+
     return 0;
 }
