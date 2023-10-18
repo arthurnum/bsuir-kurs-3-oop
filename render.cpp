@@ -14,7 +14,16 @@ void Render::setColor(int r, int g, int b, int a) {
 
 void Render::renderGeometrySet(GeometrySet* geometrySet) {
     for (Geometry* figure : *geometrySet->items()) {
-        setColor(figure->color()[0], figure->color()[1], figure->color()[2], 255);
-        SDL_RenderDrawLines(_render, figure->geometry(), figure->getPointsCount());
+        // setColor(figure->color()[0], figure->color()[1], figure->color()[2], 255);
+        // SDL_RenderDrawLines(_render, figure->geometry(), figure->getPointsCount());
+
+        SDL_Point* points = figure->geometry();
+        int r = figure->color()[0],
+            g = figure->color()[1],
+            b = figure->color()[2];
+        int width = figure->active() ? 2 : 1;
+        for (int i = 0; i < figure->getPointsCount() - 1; i++) {
+            thickLineRGBA(_render, points[i].x, points[i].y, points[i+1].x, points[i+1].y, width, r, g, b, 255);
+        }
     }
 }

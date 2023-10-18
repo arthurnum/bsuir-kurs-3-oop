@@ -2,6 +2,7 @@
 #define H_RENDER
 
 #include <SDL.h>
+#include <SDL2_gfxPrimitives.h>
 
 #include "geometry/geometry.h"
 #include "geometry/geometry_set.h"
