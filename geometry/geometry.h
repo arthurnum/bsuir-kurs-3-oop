@@ -17,7 +17,8 @@ class Geometry {
         void drop() { _active = false; }
         bool active() { return _active; }
         int* color() {
-            return (_active) ? _activeColor : _color;
+            // return (_active) ? _activeColor : _color;
+            return _color;
         }
         void setColor(int r, int g, int b) {
             _color[0] = r;

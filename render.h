@@ -16,6 +16,7 @@ class Render {
         void clear();
         void present();
         void renderGeometrySet(GeometrySet* geometrySet);
+        SDL_Renderer* sdlRender() { return _render; }
 
     private:
         SDL_Renderer* _render;

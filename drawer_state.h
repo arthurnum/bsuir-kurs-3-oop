@@ -2,6 +2,7 @@
 #define H_DRAWER_STATE
 
 #include "geometry/geometry.h"
+#include "render.h"
 
 const int DRAWER_IDLE = 0;
 const int DRAWER_SET_START_POINTS = 1;
@@ -16,6 +17,7 @@ class DrawerState {
         static DrawerState* _instance;
         int _x;
         int _state;
+        Render* _render;
         Geometry* _currentFigure;
 
         static DrawerState* getInstance() {
@@ -28,9 +30,11 @@ class DrawerState {
     public:
         static int X() { return getInstance()->_x; }
         static int State() { return getInstance()->_state; }
+        static Render* MainRender() { return getInstance()->_render; }
         static Geometry* CurrentFigure() { return getInstance()->_currentFigure; }
 
         static void SetState(int state) { getInstance()->_state = state; }
+        static void SetMainRender(Render* render) { getInstance()->_render = render; }
         static void SetCurrentFigure(Geometry* figure) { getInstance()->_currentFigure = figure; }
 };
 

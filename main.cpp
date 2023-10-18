@@ -16,8 +16,6 @@
 
 
 int main() {
-    Plugin* colorizer = PluginLoader::LoadPlugin("shared/colorizer/colorizer.so");
-
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         return -1;
     }
@@ -27,13 +25,16 @@ int main() {
         return -1;
     }
 
-    SDL_Renderer* SDL_render = SDL_CreateRenderer(window, -1, 0);
+    SDL_Renderer* SDL_render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!SDL_render) {
         return -1;
     }
 
     Render* render = new Render(SDL_render);
+    DrawerState::SetMainRender(render);
     std::list<Button*> buttons;
+
+    Plugin* colorizer = PluginLoader::LoadPlugin("shared/colorizer/colorizer.so");
 
     char running = 1;
 
@@ -119,6 +120,7 @@ int main() {
                                     figuresIter = figures->itemsIterator();
                                 }
                                 (*figuresIter)->take();
+                                DrawerState::SetCurrentFigure(*figuresIter);
                             }
                         }
                         break;
@@ -130,6 +132,7 @@ int main() {
                             (*figuresIter)->drop();
                         }
                         figuresIter = figures->itemsIteratorEnd();
+                        DrawerState::SetCurrentFigure(NULL);
                         break;
 
                     // Other input here
@@ -191,6 +194,8 @@ int main() {
         for (Button* btn : buttons) {
             render->renderGeometrySet(btn->geometrySet());
         }
+
+        colorizer->render();
 
         render->present();
     }
