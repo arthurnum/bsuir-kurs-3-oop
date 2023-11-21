@@ -31,7 +31,6 @@ class Geometry {
         bool _touch;
         bool _active;
         int _color[3] = { 255, 255, 255 };
-        int _activeColor[3] = { 115, 225, 115 };
 };
 
 #endif

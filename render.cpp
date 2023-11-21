@@ -14,9 +14,6 @@ void Render::setColor(int r, int g, int b, int a) {
 
 void Render::renderGeometrySet(GeometrySet* geometrySet) {
     for (Geometry* figure : *geometrySet->items()) {
-        // setColor(figure->color()[0], figure->color()[1], figure->color()[2], 255);
-        // SDL_RenderDrawLines(_render, figure->geometry(), figure->getPointsCount());
-
         SDL_Point* points = figure->geometry();
         int r = figure->color()[0],
             g = figure->color()[1],

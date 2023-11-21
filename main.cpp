@@ -134,8 +134,6 @@ int main() {
                         figuresIter = figures->itemsIteratorEnd();
                         DrawerState::SetCurrentFigure(NULL);
                         break;
-
-                    // Other input here
                     default:
                         break;
                 }
@@ -144,8 +142,6 @@ int main() {
                     case SDLK_m:
                         DrawerState::SetState(DRAWER_IDLE);
                         break;
-
-                    // Other input here
                     default:
                         break;
                 }
