@@ -6,6 +6,7 @@
 class Ellipse : public Geometry {
     public:
         Ellipse(int x1, int y1, int a, int b);
+        Ellipse(int psize, SDL_Point* points);
         SDL_Point* geometry() override;
         void setStartPoints(int x, int y) override;
         void setFinishPoints(int x, int y) override;

@@ -6,6 +6,7 @@
 class Rectangle : public Geometry {
     public:
         Rectangle(int x1, int y1, int a, int b);
+        Rectangle(int psize, SDL_Point* points);
         SDL_Point* geometry() override;
         void setStartPoints(int x, int y) override;
         void setFinishPoints(int x, int y) override;

@@ -13,6 +13,7 @@
 #include "render.h"
 #include "drawer_state.h"
 #include "shared/plugin_loader.h"
+#include "marshal.h"
 
 
 int main() {
@@ -141,6 +142,12 @@ int main() {
                 switch (event.key.keysym.sym) {
                     case SDLK_m:
                         DrawerState::SetState(DRAWER_IDLE);
+                        break;
+                    case SDLK_s:
+                        serialize_to_file(figures);
+                        break;
+                    case SDLK_l:
+                        deserialize_from_file(figures);
                         break;
                     default:
                         break;

@@ -8,6 +8,7 @@
 class GeometrySet {
     public:
         void add(Geometry* item) { _items.push_back(item); };
+        void clear() { _items.clear(); }
         std::list<Geometry*>* items() { return &_items; }
         std::list<Geometry*>::iterator itemsIterator() { return _items.begin(); }
         std::list<Geometry*>::iterator itemsIteratorEnd() { return _items.end(); }

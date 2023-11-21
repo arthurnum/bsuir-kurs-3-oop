@@ -3,6 +3,14 @@
 
 #include <SDL.h>
 #include <cmath>
+#include <cstring>
+
+
+const unsigned char GEOMETRY_ELLIPSE = 101;
+const unsigned char GEOMETRY_LINE = 102;
+const unsigned char GEOMETRY_PARALLELOGRAM = 103;
+const unsigned char GEOMETRY_RECTANGLE = 104;
+const unsigned char GEOMETRY_TRIANGLE = 105;
 
 const double PI = 3.1415926535;
 
@@ -24,8 +32,10 @@ class Geometry {
             _color[1] = g;
             _color[2] = b;
         }
+        unsigned char geometryType() { return _gtype; }
 
     protected:
+        unsigned char _gtype;
         SDL_Point* _geometry;
         int _pointsCount;
         bool _touch;

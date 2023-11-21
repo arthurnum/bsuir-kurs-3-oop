@@ -1,6 +1,7 @@
 #include "parallelogram.h"
 
 Parallelogram::Parallelogram(int x1, int y1, int a, int b, int angleDegree) {
+    _gtype = GEOMETRY_PARALLELOGRAM;
     _x1 = x1;
     _y1 = y1;
     _a = a;
@@ -8,6 +9,13 @@ Parallelogram::Parallelogram(int x1, int y1, int a, int b, int angleDegree) {
     _angleDegree = angleDegree;
     _angleRadian = PI * angleDegree / 180.0;
     _pointsCount = 5;
+}
+
+Parallelogram::Parallelogram(int psize, SDL_Point* points) {
+    _gtype = GEOMETRY_PARALLELOGRAM;
+    _pointsCount = psize;
+    _geometry = new SDL_Point[psize];
+    std::memcpy(_geometry, points, sizeof(SDL_Point)*psize);
 }
 
 SDL_Point* Parallelogram::geometry() {

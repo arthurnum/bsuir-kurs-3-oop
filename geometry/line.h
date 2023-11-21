@@ -6,6 +6,7 @@
 class Line : public Geometry {
     public:
         Line(int x1, int y1, int x2, int y2);
+        Line(int psize, SDL_Point* points);
         SDL_Point* geometry() override;
         void setStartPoints(int x, int y) override;
         void setFinishPoints(int x, int y) override;

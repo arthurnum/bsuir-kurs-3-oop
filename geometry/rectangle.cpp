@@ -1,11 +1,19 @@
 #include "rectangle.h"
 
 Rectangle::Rectangle(int x1, int y1, int a, int b) {
+    _gtype = GEOMETRY_RECTANGLE;
     _x1 = x1;
     _y1 = y1;
     _a = a;
     _b = b;
     _pointsCount = 5;
+}
+
+Rectangle::Rectangle(int psize, SDL_Point* points) {
+    _gtype = GEOMETRY_RECTANGLE;
+    _pointsCount = psize;
+    _geometry = new SDL_Point[psize];
+    std::memcpy(_geometry, points, sizeof(SDL_Point)*psize);
 }
 
 SDL_Point* Rectangle::geometry() {

@@ -1,11 +1,19 @@
 #include "line.h"
 
 Line::Line(int x1, int y1, int x2, int y2) {
+    _gtype = GEOMETRY_LINE;
     _x1 = x1;
     _x2 = x2;
     _y1 = y1;
     _y2 = y2;
     _pointsCount = 2;
+}
+
+Line::Line(int psize, SDL_Point* points) {
+    _gtype = GEOMETRY_LINE;
+    _pointsCount = psize;
+    _geometry = new SDL_Point[psize];
+    std::memcpy(_geometry, points, sizeof(SDL_Point)*psize);
 }
 
 SDL_Point* Line::geometry() {

@@ -1,11 +1,19 @@
 #include "triangle.h"
 
 Triangle::Triangle(int x1, int y1, int a, int b) {
+    _gtype = GEOMETRY_TRIANGLE;
     _x1 = x1;
     _y1 = y1;
     _a = a;
     _b = b;
     _pointsCount = 4;
+}
+
+Triangle::Triangle(int psize, SDL_Point* points) {
+    _gtype = GEOMETRY_TRIANGLE;
+    _pointsCount = psize;
+    _geometry = new SDL_Point[psize];
+    std::memcpy(_geometry, points, sizeof(SDL_Point)*psize);
 }
 
 SDL_Point* Triangle::geometry() {
